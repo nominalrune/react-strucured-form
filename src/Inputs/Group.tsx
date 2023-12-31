@@ -3,9 +3,8 @@ import BaseGroupProps from '../types/BaseGroupProps';
 import { InputAttribute, InputDataType } from '@/types/commonTypes';
 import { Fragment, useEffect } from 'react';
 import Input from './Input';
-interface GroupProps<T extends readonly InputAttribute[]> extends BaseGroupProps<T> {
-	value: { [key in T[number]["name"]]: InputDataType<T[number]>; },
-}
+import GroupValue from '@/types/GroupValue';
+type GroupProps<T extends readonly InputAttribute[]>= BaseGroupProps<T, GroupValue<T>>;
 export default function Group<T extends readonly InputAttribute[]>({ model, value, onChange }: GroupProps<T>) {
 	useEffect(() => {
 		onChange(initialize(model));

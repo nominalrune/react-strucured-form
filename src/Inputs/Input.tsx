@@ -1,6 +1,7 @@
 import { InputAttribute } from '@/types/commonTypes';
 import { useMemo } from 'react';
 import Label from './Label';
+import Fieldset from './Fieldset';
 import SelectInput from './SelectInput';
 import TextInput from './TextInput';
 import TextareaInput from './TextareaInput';
@@ -16,17 +17,13 @@ export default function Input({ prop, handleChange, value }: InputProp) {
     const el = useMemo(() => {
         switch (prop.type) {
             case 'iterable-group':
-                return <Label {...prop}>
-                    <div className="m-2 ml-4">
+                return <Fieldset label={prop.label}>
                     <IterableGroup model={prop.model} value={value} onChange={(_value) => handleChange(prop.name, _value)} />
-                    </div>
-                </Label>;
+                </Fieldset>;
             case 'group':
-                return <Label {...prop}>
-                    <div className="m-2 ml-4">
+                return <Fieldset label={prop.label}>
                         <Group model={prop.model} value={value} onChange={(_value) => handleChange(prop.name, _value)} />
-                    </div>
-                </Label>;
+                </Fieldset>;
             case 'select':
                 return <Label {...prop}>
                     <SelectInput

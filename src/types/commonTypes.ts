@@ -1,23 +1,23 @@
 import Tuple from '@/types/Tuple';
-import React,{HTMLAttributes} from 'react';
+import React, { HTMLAttributes } from 'react';
 
-export type InputAttr<T extends InputType|"select"|"checkbox"|"textarea"|"group"|"iterable-group", Name extends string> ={
+export type InputAttr<T extends InputType | "select" | "checkbox" | "textarea" | "group" | "iterable-group", Name extends string> = {
     type: T,
     name: Name,
     label?: React.ReactNode,
     prefix?: React.ReactNode,
     suffix?: React.ReactNode,
-    defaultValue?: T extends 'checkbox' ? boolean : T extends "number" ? number : T extends "hidden" | "select" ? number | string : string,
+    defaultValue?: T extends 'checkbox' ? boolean : T extends "number" ? number : T extends "group"|"iterable-group" ? object : string,
     required?: boolean,
     className?: string,
-    readOnly?:boolean,
+    readOnly?: boolean,
     customValidator?: (value: string) => { validity: boolean, errorMessage: string; };
-}&Omit<HTMLAttributes<HTMLInputElement>,'name'>
+} & Omit<HTMLAttributes<HTMLInputElement>, 'name'>;
 
 export type Primitive = string | number | boolean;
 
-export type InputAttribute<Name extends string=string> = WithOnChange<
-    | InputAttr<InputType,Name>
+export type InputAttribute<Name extends string = string> = WithOnChange<
+    | InputAttr<InputType, Name>
     | SelectAttr<Name>
     | CheckboxAttr<Name>
     | TextareaAttr<Name>
@@ -39,7 +39,7 @@ export interface CheckboxParam<T extends WithId<DataObj<{ name: U, type: 'checkb
     handleChange: (id: string | number, name: U, value: boolean) => void;
 }
 
-export type SelectAttr<Name extends string> = InputAttr<'select',Name> & { options: readonly (readonly [label: string, value: string | number])[]; };
+export type SelectAttr<Name extends string> = InputAttr<'select', Name> & { options: readonly (readonly [label: string, value: string | number])[]; };
 export interface SelectParam<T extends WithId<DataObj<{ name: U, type: 'select'; }>>, U extends keyof T & string> {
     field: SelectAttr<U>,
     item: T,
@@ -47,7 +47,7 @@ export interface SelectParam<T extends WithId<DataObj<{ name: U, type: 'select';
 }
 
 export interface InputParam<T extends WithId<DataObj<{ name: U, type: InputType; }>>, U extends keyof T & string> {
-    field: InputAttr<InputType,U>,
+    field: InputAttr<InputType, U>,
     item: T,
     handleChange: (id: string | number, name: U, value: string | number) => void;
 }

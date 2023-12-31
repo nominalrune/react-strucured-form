@@ -1,7 +1,7 @@
 import React, { ChangeEvent, ComponentProps, } from 'react';
 import Select from 'react-select'
 export default function SelectInput(
-    { type = 'select', name, id, value, className, options, isFocused, multiple, defaultValue, onChange, ...rest }: { type?: string, name: string, id?: string, value?: string|number, className?: string, options: [label: string, value: string|number][], autoComplete?: string, isFocused?: boolean,onChange: (e: ChangeEvent<HTMLInputElement>) => any }&Omit<ComponentProps<'input'>,'ref'>
+    { type = 'select', name, id, value, className, options, isFocused, multiple, defaultValue, onChange, ...rest }: { type?: string, name: string, id?: string, value?: string|number, className?: string, options: readonly(readonly [label: string, value: string|number])[], autoComplete?: string, isFocused?: boolean,onChange: (e: ChangeEvent<HTMLInputElement>) => any }&Omit<ComponentProps<'input'>,'ref'>
 ) {
     const _options = options.map(([label, value]) => ({ label, value }))
     return (

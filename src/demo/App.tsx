@@ -64,8 +64,8 @@ export default function App() {
 					},],
 				}, {
 					type: 'iterable-group',
-					name: "workplace",
-					label: "Workplace",
+					name: "community",
+					label: "Community",
 					model: [{
 						type: "text",
 						name: "name",

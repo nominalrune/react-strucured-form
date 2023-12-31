@@ -10,7 +10,7 @@ export default function initialize<T extends readonly InputAttribute[]>(properti
             } else if (curr.type === 'group') {
                 return { ...acc, [curr.name]: circular(curr.model) };
             } else {
-                return { ...acc, [curr.name]: curr?.defaultValue };
+                return { ...acc, [curr.name]: curr?.defaultValue ?? "" };
             }
         }, {} as { [key in T[number]['name']]: InputDataType<T[number]>; });
     }

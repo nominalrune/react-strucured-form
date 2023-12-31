@@ -1,6 +1,7 @@
 import { InputAttribute } from './commonTypes';
 
-export default interface GroupProps<T extends readonly InputAttribute[]> {
+export default interface BaseGroupProps<T extends readonly InputAttribute[], U> {
 	model: T,
-	onChange: (value: any) => void,
+	value: U,
+	onChange: (value: U) => void,
 }
