@@ -14,16 +14,6 @@ export default function App() {
 				label: 'Email',
 				required: true,
 			}, {
-				type: 'password',
-				name: 'password',
-				label: 'Password',
-				required: true,
-			}, {
-				type: 'password',
-				name: 'confirmPassword',
-				label: 'Confirm Password',
-				required: true,
-			}, {
 				type: 'group',
 				name: 'contacts',
 				label: 'Contacts',
@@ -42,7 +32,19 @@ export default function App() {
 						name: "email",
 						label: "Email",
 						required: true,
-					},]
+					},, {
+						type: 'radio',
+						name: 'select',
+						label: 'select',
+						multiple: false,
+						options: [['あいうえお', 'option 1'], ['Option 2', 'option 2'], ['option 3', 'option 3']],
+					},{
+						type: 'radio',
+						name: 'muliple_select',
+						label: 'Multiple select',
+						multiple: true,
+						options: [['option 1', 'option 1'], ['option 2', 'option 2'], ['option 3', 'option 3']],
+					}]
 				}, {
 					type: 'iterable-group',
 					name: "workplace",
@@ -95,7 +97,7 @@ export default function App() {
 				suffix: 'Accept terms and conditions',
 				required: true,
 			}] as const}
-			primary={{ label: "submit", onClick: (data) => { alert(JSON.stringify(data)); } }}
+			actions={[{ label: "submit", onClick: (data) => { alert(JSON.stringify(data)); } }]}
 		/>
 	);
 }

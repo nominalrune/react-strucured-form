@@ -33,10 +33,8 @@ export default function Input({ prop, handleChange, value }: InputProp) {
                 return <Label {...prop}>
                     <SelectInput
                         {...prop}
-                        name={prop.name}
                         className="w-full md:w-auto"
                         value={value}
-                        options={prop.options}
                         onChange={(e) => handleChange(prop.name, e.target.value)}
                     />
                 </Label>;
@@ -51,7 +49,6 @@ export default function Input({ prop, handleChange, value }: InputProp) {
                 return <Radio
                     {...prop}
                     value={value}
-                    options={prop.options}
                     onChange={(e) => handleChange(prop.name, e.target.value)}
                 />;
             case 'textarea':

@@ -11,7 +11,7 @@ type Property<T extends readonly InputAttribute[]> = {
     properties: T;
     actions: { label: string, onClick: OnClick<T[number][]>; }[];
 };
-export default function Form<T extends readonly InputAttribute<string>[]>({ properties, primary, secondary, delete: _delete, cancel }: Property<T>) {
+export default function Form<T extends readonly InputAttribute<string>[]>({ properties, actions:[primary, ...actions] }: Property<T>) {
     const [data, setData] = useFormState(properties);
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e?.preventDefault();
@@ -23,7 +23,7 @@ export default function Form<T extends readonly InputAttribute<string>[]>({ prop
     return (
         <form onSubmit={primary ? handleSubmit : (e) => { e.preventDefault(); }} className={`flex flex-col`}>
             <StructuredInput properties={properties} data={data} setData={setData} />
-            <Actions data={data} actions={[primary, secondary, _delete, cancel].filter((item) => item)} />
+            <Actions data={data} actions={[primary, ...actions]} />
         </form>
     );
 }

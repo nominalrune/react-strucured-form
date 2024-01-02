@@ -1,19 +1,27 @@
-import { ChangeEvent, ComponentProps } from 'react';
-import Input from './Input';
+import { ChangeEvent } from 'react';
 import CheckboxLabel from './CheckboxLabel';
 import Fieldset from './Fieldset';
 import { RadioAttr } from '@/types/commonTypes';
 
 export default function Radio(
-	prop: RadioAttr<string> & { value: any; onChange: (key: string, value: any) => void; },
+	{ label, options, multiple, name, value, onChange, type: _, ...prop }: RadioAttr<string> & { value: any, onChange: (e: ChangeEvent<HTMLInputElement>) => void; },
 ) {
-	return <Fieldset label={label}>
+	const type = multiple ? 'checkbox' : 'radio';
+	const handleChange = multiple ? (e: ChangeEvent<HTMLInputElement>) => {
+		const newValue = (value.includes(e.target.value))
+			? value.filter((v: string | number) => v !== e.target.value)
+			: [...value, e.target.value];
+		onChange({ ...e, target: { ...e.target, value: newValue } });
+	} : onChange;
+	return <Fieldset label={label} overflowScroll={false} className='p-0'>
 		{
-			<CheckboxLabel {...prop}>
-				<Input
+			options.map(([label, itemValue]) => <CheckboxLabel key={type + name + itemValue} label={label}>
+				<input type={type}
 					{...prop}
-					onChange={(e) => handleChange(prop.name, e.target.value)} />
+					name={name}
+					value={itemValue}
+					onChange={handleChange} />
 			</CheckboxLabel>
-		}
+			)}
 	</Fieldset>;
 }
