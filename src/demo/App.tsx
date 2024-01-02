@@ -27,12 +27,8 @@ export default function App() {
 				type: 'group',
 				name: 'contacts',
 				label: 'Contacts',
+				direction:"horizontal",
 				model: [{
-					type: "email",
-					name: "email",
-					label: "Email",
-					required: true,
-				},{
 					type: 'iterable-group',
 					name: 'friends',
 					label: 'Friends',
@@ -66,6 +62,21 @@ export default function App() {
 					type: 'iterable-group',
 					name: "community",
 					label: "Community",
+					model: [{
+						type: "text",
+						name: "name",
+						label: "Name",
+						required: true,
+					}, {
+						type: "email",
+						name: "email",
+						label: "Email",
+						required: true,
+					},],
+				},{
+					type: 'iterable-group',
+					name: "family",
+					label: "family",
 					model: [{
 						type: "text",
 						name: "name",

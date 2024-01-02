@@ -6,8 +6,8 @@ export default function TextInput(
 ) {
     const input = useRef<HTMLInputElement>();
     const classString = underlineStyle
-        ? "border-0 border-b-2 border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 invalid:border-red-300 focus:invalid:border-red-300 focus:invalid:ring-red-300 backdrop-blur "
-        : "border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 invalid:border-red-300 focus:invalid:border-red-300 focus:invalid:ring-red-300 rounded-md shadow-sm ";
+        ? "border-0 border-b-2 border-gray-300 empty:border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 invalid:border-red-300 focus:invalid:border-red-300 focus:invalid:ring-red-300 backdrop-blur "
+        : "border-gray-300 empty:border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 invalid:border-red-300 focus:invalid:border-red-300 focus:invalid:ring-red-300 rounded-md shadow-sm ";
     useEffect(() => {
         if (isFocused && input.current) {
             input.current.focus();
