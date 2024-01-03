@@ -26,7 +26,7 @@ export default function IterableGroup<T extends readonly InputAttribute[]>({ mod
 	}
 	return <div className='grid gap-2 justify-start'>
 		{list.map((item) => (
-			<div key={item.managed_list_id} className='inline-flex flex-row items-center gap-2'>
+			<div key={item.managed_list_id} className='flex flex-row items-start gap-2 box-border has-[button:hover]:ring-2 has-[button:hover]:bg-slate-400/5 ring-slate-600/20 rounded-md'>
 				{model.map((field: InputAttribute) => (
 					<Input
 						key={item.managed_list_id + field.name}
@@ -42,11 +42,11 @@ export default function IterableGroup<T extends readonly InputAttribute[]>({ mod
 			</div>
 		))}
 		<button
-			className='group relative h-12 w-full flex items-center justify-center border-solid border-2 border-slate-100 bg-slate-50 rounded-md hover:border-slate-200 active:border-slate-300'
+			className='group relative min-h-[3rem] h-full w-full flex items-center justify-center border-solid border-2 border-slate-100 bg-slate-50 rounded-md hover:border-slate-200 active:border-slate-300'
 			onClick={handleAdd}>
 			<FiPlus className="absolute z-20 text-2xl font-bold text-slate-400 group-hover:text-slate-600 group-active:text-slate-900" />
 			<div className="absolute z-10 bg-slate-50/90 group-hover:bg-white/60 rounded-md w-full h-full"></div>
-			<div className="absolute z-0 left-0 flex flex-row gap-2 w-fit pointer-events-none">
+			<div className="text-start flex flex-row gap-2 w-fit pointer-events-none">
 				{model.map((field: InputAttribute) => (
 					<Input key={field.name} prop={field} handleChange={() => { }} value={""} />
 				))}
