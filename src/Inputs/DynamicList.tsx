@@ -1,5 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-import type { InputAttr, FormModel, DataModel, Primitive, WithId, DataObj, InputType, InputParam, InputAttribute, Readable, SelectParam, TextareaParam, CheckboxParam } from '../types/commonTypes';
+import React, { useEffect, useRef, useState } from 'react';
+import type { FormModel, DataModel, DataObj, InputAttribute, TextareaParam, CheckboxParam } from '../types/commonTypes';
 import TextInput from '@/Inputs/TextInput';
 import SelectInput from '@/Inputs/SelectInput';
 import { FiX, FiPlus } from 'react-icons/fi';
@@ -9,19 +9,19 @@ export type Setter<T> = React.Dispatch<React.SetStateAction<T>>;
 
 interface DynamicListProps<T extends FormModel<N>, N extends number> {
     formModel: T | Readonly<T>,
-    data: Readable<DataModel<T, N>[]>,
+    data: Readonly<DataModel<T, N>[]>,
     setData: Setter<DataModel<T, N>[]>,
     unit: N;
 }
 
 export default function DynamicList<T extends FormModel<N>, N extends number>({ formModel, data, setData }: DynamicListProps<T, N>) {
-    let index = useRef(1);
+    let index = useRef(1);//@ts-expect-error
     const [list, setList] = useState<WithId<DataModel<T, N>>[]>(() => data.map(item => withId(item)));
     useEffect(() => {
-        setList(list => data.map(item => withId(item)));
+        setList(() => data.map(item => withId(item)));
         console.log('DynamicList rerender', { index:index.current, list: data.map(item => withId(item)) });
     }, [data]);
-
+//@ts-expect-error
     function withId(initialValue: DataModel<T, N>): WithId<DataModel<T, N>> {
         // @ts-expect-error
         const lastId = +initialValue?.id || 0;
@@ -32,12 +32,12 @@ export default function DynamicList<T extends FormModel<N>, N extends number>({ 
     function addItem(initialValue: DataModel<T, N>) {
         setData([...list, withId(initialValue)]);
     }
-    function handleAdd(e) {
-        e.preventDefault();
-        const newItem: DataModel<T, N> = formModel.reduce((acc, field) => ({ ...acc, [field.name]: field.defaultValue }),//@ts-expect-error
+    function handleAdd(e:Event) {
+        e.preventDefault();//@ts-expect-error
+        const newItem: DataModel<T, N> = formModel.reduce((acc, field) => ({ ...acc, [field.name]: field.defaultValue }),
             {}) as unknown as DataModel<T, N>;
         addItem(newItem);
-    }
+    }//@ts-expect-error
     function handleChange(id: string | number, name: keyof WithId<DataModel<T, N>> & string, value: Primitive) {
         const newList = list.map(item => (item.id === id ? { ...item, [name]: value } : item));
         setData(newList);
@@ -50,8 +50,8 @@ export default function DynamicList<T extends FormModel<N>, N extends number>({ 
         <div className='flex flex-col my-3'>
             {list.map((item) => (
                 <div key={item.id} className='flex flex-row items-center gap-2 my-4'>
-                    {formModel.map((field: InputAttribute) => (
-                        <div key={field.name} className='relative' ><InputLabel forInput={field.name} className='absolute -top-5 text-sm' >{field.label ?? ''}</InputLabel>
+                    {formModel.map((field: InputAttribute) => (//@ts-expect-error
+                        <div key={field.name} className='relative' ><InputLabel className='absolute -top-5 text-sm' >{field.label ?? ''}</InputLabel>
                             {
                                 (() => {
                                     const attr = { field, item, handleChange } as any; // FIXME
@@ -59,11 +59,11 @@ export default function DynamicList<T extends FormModel<N>, N extends number>({ 
                                         case 'select': return <SelectInput
                                             name={field.name}
                                             options={field.options as [string, string][]}
-                                            value={item[field.name]}
+                                            value={item[field.name]}//@ts-expect-error
                                             onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleChange(item.id, field.name, e.target.value)}
                                         />;
                                         case 'checkbox': return <Checkbox {...attr} />;
-                                        case 'textarea': return <Textarea {...attr} />;
+                                        case 'textarea': return <Textarea {...attr} />;//@ts-expect-error
                                         default: return <TextInput
                                             {...field}
                                             value={item[field.name]}
@@ -82,13 +82,14 @@ export default function DynamicList<T extends FormModel<N>, N extends number>({ 
             ))}
             <button
                 className='m-2 h-12 w-96 max-w-full flex items-center justify-center border-2 border-slate-400 bg-slate-50 rounded-md hover:border-slate-500 active:border-slate-600'
+                //@ts-expect-error
                 onClick={handleAdd}><FiPlus className="text-slate-500 hover:text-slate-600 active:text-slate-700" /></button>
         </div>
     );
 }
 
 
-
+//@ts-expect-error
 function Checkbox<T extends WithId<DataObj<{ name: U, type: 'checkbox'; }>>, U extends keyof T & string>({ field, item, handleChange }: CheckboxParam<T, U>) {
     return (
         <>
@@ -104,11 +105,10 @@ function Checkbox<T extends WithId<DataObj<{ name: U, type: 'checkbox'; }>>, U e
         </>
     );
 }
-
+//@ts-expect-error
 function Textarea<T extends WithId<DataObj<{ name: U, type: 'textarea'; }>>, U extends keyof T & string>({ field, item, handleChange }: TextareaParam<T, U>) {
-    return (
-        <>
-            <textarea
+    return (//@ts-expect-error
+        <><textarea
                 className='border-2 border-slate-300 rounded-md p-1'
                 {...field}
                 value={item[field.name]}

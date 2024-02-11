@@ -15,7 +15,10 @@ const entries = glob.sync('**/index.+(js|ts|tsx)', { cwd: basePath }).reduce(
 
 module.exports = {
 	mode: "production",
-	entry: "./src/index.ts",
+	entry: {
+		Form: "./src/Form.tsx",
+		StructuredInput: "./src/StructuredInput.tsx"
+	},
 	optimization: {
 		nodeEnv: "production", // NODE_ENV環境変数の設定
 		minimize: true, // 出力結果を1行にするかどうか
@@ -32,10 +35,7 @@ module.exports = {
 			{
 				test: /\.(j|t)sx?$/,
 				loader: 'ts-loader',
-				exclude: /node_modules/,
-				options: {
-					transpileOnly: true
-				}
+				exclude: /node_modules/
 			},
 			{
 				test: /\.css$/i,
@@ -48,17 +48,20 @@ module.exports = {
 		],
 	},
 	output: {
+		// library: {type:"module"},
+		// filename: 'index.js',
 		path: path.resolve(__dirname, 'dist'),
-		// filename: '[name]/index.js',
-		// library: ['StructuredForm', '[name]'],
+		// filename: '[name].js',
+		libraryTarget: 'umd',
+		library: '[name]',
 	},
-	experiments: {
-		outputModule: true,
-	},
-	externalsType: 'module',
-	 externals: [
-	 	'react',
-	 	'react-dom',
-	 	'react-dom/client',
-	 ],
+	// experiments: {
+	// 	outputModule: true,
+	// },
+	// externalsType: 'module',
+	externals: [
+		'react',
+		'react-dom',
+		'react-dom/client',
+	],
 };

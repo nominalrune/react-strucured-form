@@ -45,7 +45,7 @@ export default function Input({ prop, handleChange, value }: InputProp) {
                         value={value}
                         onChange={(e) => handleChange(prop.name, e.target.checked)} />
                 </CheckboxLabel>;
-            case 'radio':
+            case 'radio'://@ts-expect-error
                 return <Radio
                     {...prop}
                     value={value}

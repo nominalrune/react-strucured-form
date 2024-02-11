@@ -12,7 +12,7 @@ export default function StructuredInput<T extends readonly InputAttribute[]>({ p
 		{properties.map((prop) => (
 			<Input
 				key={'input_' + prop.name}
-				prop={prop}
+				prop={prop}//@ts-expect-error
 				value={data[prop.name]}
 				handleChange={setData} />
 		))}

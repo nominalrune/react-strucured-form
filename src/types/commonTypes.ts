@@ -1,5 +1,5 @@
 import Tuple from '@/types/Tuple';
-import React, { ComponentProps, HTMLAttributes } from 'react';
+import React, { ComponentProps } from 'react';
 
 export type InputAttribute<Name extends string = string> = WithOnChange<
     | InputAttr<InputType, Name>
@@ -18,12 +18,12 @@ export type InputDataType<T extends InputAttribute<string>> =
     : T['type'] extends 'hidden'
     ? number | string
     : T['type'] extends 'select'
-    ? number | string
+    ? number | string//@ts-expect-error
     : T['multiple'] extends true 
     ? number[] | string[]
-    : T["type"] extends "iterable-group"
-    ? { [key in T['model'][number]['name']]
-        : InputDataType<T['model'][number]> }[]
+    : T["type"] extends "iterable-group"//@ts-expect-error
+    ? { [key in T['model'][number]['name']]//@ts-expect-error
+        : InputDataType<T['model'][number]> }[]//@ts-expect-error
     : T['type'] extends 'group' ? { [key in T['model'][number]['name']]: InputDataType<T['model'][number]> }
     : string;
 export type InputAttr<T extends InputType | "select" | "checkbox" | "textarea" | "group" | "iterable-group", Name extends string> = {

@@ -32,7 +32,7 @@ export default function App() {
 						name: "email",
 						label: "Email",
 						required: true,
-					},, {
+					}, {
 						type: 'radio',
 						name: 'select',
 						label: 'select',

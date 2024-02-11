@@ -1,15 +1,15 @@
 import initialize from '@/functions/initialize';
 import { InputAttribute } from '@/types/commonTypes';
-import { useEffect, MouseEvent, useLayoutEffect } from 'react';
+import { useEffect, MouseEvent } from 'react';
 import BaseGroupProps from '@/types/BaseGroupProps';
 import GroupValue from '@/types/GroupValue';
-import useList, { WithId } from '@/functions/useList';
+import useList from '@/functions/useList';
 import Input from './Input';
 import { FiPlus, FiX } from 'react-icons/fi';
 
 type IterableGroupProps<T extends readonly InputAttribute[]> = BaseGroupProps<T, GroupValue<T>[]>;
 export default function IterableGroup<T extends readonly InputAttribute[]>({ model, value, onChange }: IterableGroupProps<T>) {
-	const { list, add, remove, update, replace } = useList<GroupValue<T>>(value ?? [initialize(model)], onChange);
+	const { list, add, remove, update } = useList<GroupValue<T>>(value ?? [initialize(model)], onChange);
 	useEffect(() => {
 		onChange([initialize(model)]);
 	}, [model]);
@@ -32,6 +32,7 @@ export default function IterableGroup<T extends readonly InputAttribute[]>({ mod
 						key={item.managed_list_id + field.name}
 						prop={field}
 						handleChange={(key: string, value: any) => handleChange(item.managed_list_id, key, value)}
+						//@ts-expect-error
 						value={item[field.name]}
 					/>
 				))}

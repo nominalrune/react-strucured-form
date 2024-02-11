@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import useId from './useId';
 export type WithId<T> = T & {
 	managed_list_id: number;
@@ -6,7 +6,7 @@ export type WithId<T> = T & {
 export default function useList<T>(original: T[], setter: (value: T[]) => any) {
 	const issue = useId(original.length - 1);
 	const [list, setList] = useState<WithId<T>[]>(() => original.map(withId));
-	useEffect(() => {
+	useEffect(() => {//@ts-expect-error
 		setter(list.map(withoutId));
 	}, [list]);
 	function withId<T>(obj: T, id = issue()): WithId<T> {
