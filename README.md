@@ -24,9 +24,9 @@ npm install react-structured-form -D
 ## Usage
 
 ```jsx
-import Form from 'react-structured-form';
+import {Form} from 'react-structured-form';
 
-function App(){
+export default function App(){
 	<Form
 		properties={[{
 			type: 'text',
