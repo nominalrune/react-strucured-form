@@ -69,7 +69,7 @@ export default function Input({ prop, handleChange, value }: InputProp) {
                         type={prop.type}
                         name={prop.name}
                         value={value}
-                        handleChange={(e) => handleChange(prop.name, e.target.value)}
+                        onChange={(e) => handleChange(prop.name, e.target.value)}
                     />
                 </Label>;
         };

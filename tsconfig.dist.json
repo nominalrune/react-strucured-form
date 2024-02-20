@@ -3,33 +3,20 @@
 		"allowJs": true,
 		"allowSyntheticDefaultImports": true,
 		"baseUrl": ".",
-		"declaration": true,
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
-		"jsx": "react-jsxdev",
-		"module": "commonjs",
+		"jsx": "react-jsx",
+		"module": "esnext",
 		"moduleResolution": "node",
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitAny": true,
 		"noImplicitReturns": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
-		"noErrorTruncation": true,
-		"outDir": "dist",
-		"paths": {
-			"@/*": [
-				"src/*",
-			],
-			"common/*": [
-				"src/common/*",
-			]
-		},
+		"noEmit": true,
 		"resolveJsonModule": true,
 		"strict": true,
-		"target": "esnext",
-		"types": [
-			"jest",
-		],
+		"target": "es2020",
 		"lib": [
 			"dom",
 			"dom.iterable",
@@ -37,10 +24,6 @@
 		]
 	},
 	"exclude": [
-		"dist",
 		"node_modules"
-	],
-	"include": [
-		"src/**/*"
 	]
 }

@@ -1,8 +1,8 @@
 {
     "name": "react-structured-form",
-    "version": "0.0.2",
+    "version": "0.0.7",
     "description": "React Forms",
-    "main": "dist/main.mjs",
+    "main": "dist/index.js",
     "keywords": [
         "react",
         "typescript",
@@ -13,10 +13,10 @@
     "scripts": {
         "test": "jest --config jest.config.js",
         "build": "tsc -p ./tsconfig.prod.json && webpack",
-        "start": "webpack serve --mode development --open --config ./webpack.config.dev.js",
-        "prepare": "npm run build"
+        "publish": "npm run build && npm publish"
     },
     "devDependencies": {
+        "@react-icons/all-files": "^4.1.0",
         "@tailwindcss/forms": "^0.5.7",
         "@types/jest": "^29.5.12",
         "@types/react": "^18.2.55",
@@ -27,7 +27,6 @@
         "postcss": "^8.4.34",
         "postcss-loader": "^7.3.4",
         "postcss-preset-env": "^9.3.0",
-        "react-icons": "^4.12.0",
         "react-select": "^5.8.0",
         "style-loader": "^3.3.4",
         "tailwindcss": "^3.4.1",
@@ -36,8 +35,7 @@
         "tsconfig-paths-webpack-plugin": "^4.1.0",
         "typescript": "^5.3.3",
         "webpack": "^5.90.1",
-        "webpack-cli": "^4.10.0",
-        "webpack-dev-server": "^4.15.1"
+        "webpack-cli": "^4.10.0"
     },
     "dependencies": {
         "react": "^18.2.0",

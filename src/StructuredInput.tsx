@@ -1,10 +1,10 @@
-import { InputAttribute, InputDataType } from './types/commonTypes';
+import { DataModel, InputAttribute } from './types/commonTypes';
 import Input from './Inputs/Input';
 
 interface StructuredInputProps<T extends readonly InputAttribute[]> {
 	properties: T;
-	data: { [key in T[number]['name']]: InputDataType<T[number]>; };
-	setData: (key: T[number]['name'], value:InputDataType<T[number]>) => void;
+	data: DataModel<T>;
+	setData: <K extends keyof DataModel<T>&string>(key: K, value:DataModel<T>[K]) => void;
 }
 
 export default function StructuredInput<T extends readonly InputAttribute[]>({ properties, data, setData }: StructuredInputProps<T>) {
@@ -12,7 +12,7 @@ export default function StructuredInput<T extends readonly InputAttribute[]>({ p
 		{properties.map((prop) => (
 			<Input
 				key={'input_' + prop.name}
-				prop={prop}//@ts-expect-error
+				prop={prop}
 				value={data[prop.name]}
 				handleChange={setData} />
 		))}

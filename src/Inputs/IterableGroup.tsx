@@ -5,16 +5,18 @@ import BaseGroupProps from '@/types/BaseGroupProps';
 import GroupValue from '@/types/GroupValue';
 import useList from '@/functions/useList';
 import Input from './Input';
-import { FiPlus, FiX } from 'react-icons/fi';
+import {FiPlus} from '@react-icons/all-files/fi/FiPlus';
+import {FiX} from '@react-icons/all-files/fi/FiX';
 
 type IterableGroupProps<T extends readonly InputAttribute[]> = BaseGroupProps<T, GroupValue<T>[]>;
 export default function IterableGroup<T extends readonly InputAttribute[]>({ model, value, onChange }: IterableGroupProps<T>) {
 	const { list, add, remove, update } = useList<GroupValue<T>>(value ?? [initialize(model)], onChange);
-	useEffect(() => {
+	useEffect(() => {//@ts-expect-error
 		onChange([initialize(model)]);
 	}, [model]);
 	function handleAdd(e: MouseEvent) {
 		e.preventDefault();
+		//@ts-expect-error
 		const newItem: GroupValue<T> = initialize(model);
 		add(newItem);
 	}

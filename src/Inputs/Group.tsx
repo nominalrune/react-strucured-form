@@ -6,7 +6,7 @@ import Input from './Input';
 import GroupValue from '@/types/GroupValue';
 type GroupProps<T extends readonly InputAttribute[]> = BaseGroupProps<T, GroupValue<T>> & { direction: "horizontal" | "vertical"; };
 export default function Group<T extends readonly InputAttribute[]>({ model, value, onChange, direction }: GroupProps<T>) {
-	useEffect(() => {
+	useEffect(() => {//@ts-expect-error
 		onChange(initialize(model));
 	}, [model]);
 	function handleChange(name: string, _value: any) {

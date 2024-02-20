@@ -1,9 +1,7 @@
-import { InputAttribute, InputDataType } from '@/types/commonTypes';
+import { DataModel, InputAttribute } from '@/types/commonTypes';
 
-export default function initialize<T extends readonly InputAttribute[]>(properties: T): {
-    [key in T[number]['name']]: InputDataType<T[number]>;
-} {
-    function circular(model: readonly InputAttribute[]): { [key in T[number]['name']]: InputDataType<T[number]>; } {
+export default function initialize<T extends readonly InputAttribute[]>(properties: T): DataModel<T> {
+    function circular(model: readonly InputAttribute[]): DataModel<T> {
         return model.reduce((acc, curr) => {
             if (curr.type === 'iterable-group') {
                 return { ...acc, [curr.name]: [circular(curr.model)] };
@@ -12,7 +10,7 @@ export default function initialize<T extends readonly InputAttribute[]>(properti
             } else {
                 return { ...acc, [curr.name]: curr?.defaultValue ?? "" };
             }
-        }, {} as { [key in T[number]['name']]: InputDataType<T[number]>; });
+        }, {} as DataModel<T>);
     }
     return circular(properties);
 }

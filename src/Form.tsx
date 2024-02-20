@@ -1,11 +1,11 @@
 import {
     type InputAttribute,
-    InputDataType
+    DataModel
 } from './types/commonTypes';
 import StructuredInput from './StructuredInput';
 import useFormState from './functions/useFormState';
 import Actions from './Actions';
-export type OnClick<T extends { name: string, type: any; }[]> = (data: { [key in T[number]['name']]: InputDataType<T[number]>; }) => void | Promise<any>;
+export type OnClick<T extends { name: string, type: any; }[]> = (data: DataModel<T>) => void | Promise<any>;
 
 type Property<T extends readonly InputAttribute[]> = {
     properties: T;
@@ -22,7 +22,9 @@ export default function Form<T extends readonly InputAttribute<string>[]>({ prop
 
     return (
         <form onSubmit={primary ? handleSubmit : (e) => { e.preventDefault(); }} className={`flex flex-col`}>
+            {/**@ts-expect-error*/}
             <StructuredInput properties={properties} data={data} setData={setData} />
+            {/**@ts-expect-error*/}
             <Actions data={data} actions={[primary, ...actions]} />
         </form>
     );

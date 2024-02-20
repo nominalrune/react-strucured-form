@@ -1,8 +1,9 @@
-import Form from '@/Form';
+import Form from 'react-structured-form/Form';
 import './app.css';
 export default function App() {
-	return (
-		<Form
+	return (<>
+		rendered
+		{/* <Form
 			properties={[{
 				type: 'text',
 				name: 'name',
@@ -17,7 +18,7 @@ export default function App() {
 				type: 'group',
 				name: 'contacts',
 				label: 'Contacts',
-				direction:"horizontal",
+				direction: "horizontal",
 				model: [{
 					type: 'iterable-group',
 					name: 'friends',
@@ -38,7 +39,7 @@ export default function App() {
 						label: 'select',
 						multiple: false,
 						options: [['あいうえお', 'option 1'], ['Option 2', 'option 2'], ['option 3', 'option 3']],
-					},{
+					}, {
 						type: 'radio',
 						name: 'muliple_select',
 						label: 'Multiple select',
@@ -75,7 +76,7 @@ export default function App() {
 						label: "Email",
 						required: true,
 					},],
-				},{
+				}, {
 					type: 'iterable-group',
 					name: "family",
 					label: "family",
@@ -98,6 +99,6 @@ export default function App() {
 				required: true,
 			}] as const}
 			actions={[{ label: "submit", onClick: (data) => { alert(JSON.stringify(data)); } }]}
-		/>
-	);
+		/> */}
+	</>);
 }

@@ -17,7 +17,8 @@ module.exports = {
 	mode: "production",
 	entry: {
 		Form: "./src/Form.tsx",
-		StructuredInput: "./src/StructuredInput.tsx"
+		StructuredInput: "./src/StructuredInput.tsx",
+		index: "./src/index.ts",
 	},
 	optimization: {
 		nodeEnv: "production", // NODE_ENV環境変数の設定
