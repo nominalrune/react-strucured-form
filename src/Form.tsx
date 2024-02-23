@@ -1,10 +1,12 @@
-import {
-    type InputAttribute,
+import type {
+    InputAttribute,
     DataModel
 } from './types/commonTypes';
 import StructuredInput from './StructuredInput';
 import useFormState from './functions/useFormState';
 import Actions from './Actions';
+import './index.css';
+
 export type OnClick<T extends { name: string, type: any; }[]> = (data: DataModel<T>) => void | Promise<any>;
 
 type Property<T extends readonly InputAttribute[]> = {
@@ -21,7 +23,7 @@ export default function Form<T extends readonly InputAttribute<string>[]>({ prop
     }
 
     return (
-        <form onSubmit={primary ? handleSubmit : (e) => { e.preventDefault(); }} className={`flex flex-col`}>
+        <form id={"rsf"} onSubmit={primary ? handleSubmit : (e) => { e.preventDefault(); }} className={`flex flex-col`}>
             {/**@ts-expect-error*/}
             <StructuredInput properties={properties} data={data} setData={setData} />
             {/**@ts-expect-error*/}

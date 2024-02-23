@@ -26,9 +26,9 @@ export default function IterableGroup<T extends readonly InputAttribute[]>({ mod
 	function handleDelete(id: number) {
 		remove(id);
 	}
-	return <div className='grid gap-2 justify-start'>
+	return <div className='grid justify-start gap-2 m-3'>
 		{list.map((item) => (
-			<div key={item.managed_list_id} className='flex flex-row items-start gap-2 box-border has-[button:hover]:ring-2 has-[button:hover]:bg-slate-400/5 ring-slate-600/20 rounded-md'>
+			<div key={item.managed_list_id} className='relative flex flex-row items-start gap-2 px-4 pt-2 pb-6 box-border transition-colors has-[button:hover]:bg-stone-200/10 has-[button:hover]:shadow rounded-xl'>
 				{model.map((field: InputAttribute) => (
 					<Input
 						key={item.managed_list_id + field.name}
@@ -40,16 +40,16 @@ export default function IterableGroup<T extends readonly InputAttribute[]>({ mod
 				))}
 				<button
 					type='button'
-					className='h-5 w-5 flex items-center justify-center border-none p-[2px] bg-transparent text-slate-400 hover:text-slate-600 active:text-slate-900 active:bg-slate-900/5'
+					className='absolute right-1 top-1 size-7 flex items-center justify-center rounded-2xl border-none bg-transparent text-slate-400 hover:text-slate-600 hover:bg-white hover:shadow active:text-slate-900 active:bg-stone-900/5'
 					onClick={() => handleDelete(item.managed_list_id)}><FiX /></button>
 			</div>
 		))}
 		<button
-			className='group relative min-h-[3rem] h-full w-full flex items-center justify-center border-solid border-2 border-slate-100 bg-slate-50 rounded-md hover:border-slate-200 active:border-slate-300'
+			className='group/add relative min-h-[3rem] h-full w-full flex items-center justify-center border-solid border-2 border-slate-100 bg-slate-50 rounded-xl hover:border-slate-200 active:border-slate-300'
 			onClick={handleAdd}>
-			<FiPlus className="absolute z-20 text-2xl font-bold text-slate-400 group-hover:text-slate-600 group-active:text-slate-900" />
-			<div className="absolute z-10 bg-slate-50/90 group-hover:bg-white/60 rounded-md w-full h-full"></div>
-			<div className="text-start flex flex-row gap-2 w-fit pointer-events-none">
+			<div className="absolute z-20 text-2xl size-8 p-2 grid items-center justify-center rounded-full text-slate-400 group-hover/add:text-slate-600 group-hover/add:bg-white group-hover:shadow group-active/add:text-slate-900"><FiPlus/></div>
+			<div className="absolute transition-colors z-10 bg-slate-50/90 group-hover/add:bg-slate-50/60 w-full h-full"></div>
+			<div className="text-start px-4 pt-2 pb-6 flex flex-row gap-2 w-fit pointer-events-none">
 				{model.map((field: InputAttribute) => (
 					<Input key={field.name} prop={field} handleChange={() => { }} value={""} />
 				))}

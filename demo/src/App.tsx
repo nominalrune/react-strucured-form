@@ -1,9 +1,8 @@
-import Form from 'react-structured-form/Form';
-import './app.css';
+import {Form} from 'react-structured-form';
 export default function App() {
 	return (<>
 		rendered
-		{/* <Form
+		<Form
 			properties={[{
 				type: 'text',
 				name: 'name',
@@ -99,6 +98,6 @@ export default function App() {
 				required: true,
 			}] as const}
 			actions={[{ label: "submit", onClick: (data) => { alert(JSON.stringify(data)); } }]}
-		/> */}
+		/>
 	</>);
 }

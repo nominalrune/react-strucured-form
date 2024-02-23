@@ -8,7 +8,7 @@ interface StructuredInputProps<T extends readonly InputAttribute[]> {
 }
 
 export default function StructuredInput<T extends readonly InputAttribute[]>({ properties, data, setData }: StructuredInputProps<T>) {
-	return <>
+	return <div className="flex flex-col gap-2">
 		{properties.map((prop) => (
 			<Input
 				key={'input_' + prop.name}
@@ -16,5 +16,5 @@ export default function StructuredInput<T extends readonly InputAttribute[]>({ p
 				value={data[prop.name]}
 				handleChange={setData} />
 		))}
-	</>;
+	</div>;
 }

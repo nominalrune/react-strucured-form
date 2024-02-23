@@ -1,8 +1,10 @@
 const path = require('path');
 const glob = require('glob');
-const basePath = path.resolve('src');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
+const basePath = path.resolve('src');
+
+// basePath配下の各ディレクトリを複数のentryとする
 const entries = glob.sync('**/index.+(js|ts|tsx)', { cwd: basePath }).reduce(
 	(prev, file) => ({
 		...prev,
@@ -13,17 +15,11 @@ const entries = glob.sync('**/index.+(js|ts|tsx)', { cwd: basePath }).reduce(
 
 module.exports = {
 	mode: "development",
-	// context: path.resolve(__dirname, 'src'),
-	// 	entry: {
-	// 		index:path.resolve(__dirname, 'src', 'index.tsx'),
-	// 		App: path.resolve(__dirname, 'src', 'App.tsx'),
-	// },//
-	entry: entries,//
+	entry: entries,
 	optimization: {
 		nodeEnv: "development", // NODE_ENV環境変数の設定
 		minimize: false, // 出力結果を1行にするかどうか
 	},
-	devtool: 'eval-cheap-source-map',
 	resolve: {
 		plugins: [new TsconfigPathsPlugin({
 			configFile: "./tsconfig.json",
@@ -52,18 +48,15 @@ module.exports = {
 		],
 	},
 	output: {
-		path: path.resolve(__dirname, 'public'),
+		path: path.resolve(__dirname, 'devServer'),
 		filename: '[name]/index.js',
 	},
 	devServer: {
 		static: {
-			directory: path.resolve(__dirname, 'public'),
+			directory: path.join(__dirname, 'devServer'),
 		},
 		compress: true,
 		port: 9000,
 		watchFiles: ['src/**/*'],
-		client: {
-			overlay: true,
-		},
 	},
 };

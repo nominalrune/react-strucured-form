@@ -12,7 +12,7 @@ export default function Group<T extends readonly InputAttribute[]>({ model, valu
 	function handleChange(name: string, _value: any) {
 		onChange({ ...value, [name]: _value });
 	}
-	return <div className={`flex ${direction === "horizontal" ? "flex-row" : "flex-col"} gap-4`}>
+	return <div className={`flex ${direction === "horizontal" ? "flex-row overflow-x-auto" : "flex-col"} gap-4 p-3`}>
 		{//@ts-expect-error
 			model.map((prop) => <Input key={'input_group_' + prop.name} prop={prop} value={value[prop.name]} handleChange={handleChange} />)
 		}

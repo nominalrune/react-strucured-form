@@ -5,7 +5,7 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const basePath = path.resolve('src');
 
 // basePath配下の各ディレクトリを複数のentryとする
-const entries = glob.sync('**/index.+(js|ts|tsx)', { cwd: basePath }).reduce(
+const entries = glob.sync('**/index.+(ts|tsx)', { cwd: basePath }).reduce(
 	(prev, file) => ({
 		...prev,
 		[path.dirname(file)]: path.resolve(basePath, file),
@@ -16,8 +16,6 @@ const entries = glob.sync('**/index.+(js|ts|tsx)', { cwd: basePath }).reduce(
 module.exports = {
 	mode: "production",
 	entry: {
-		Form: "./src/Form.tsx",
-		StructuredInput: "./src/StructuredInput.tsx",
 		index: "./src/index.ts",
 	},
 	optimization: {
