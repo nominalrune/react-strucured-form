@@ -15,7 +15,7 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"outDir": "dist",
-		"emitDeclarationOnly": true,
+		"emitDeclarationOnly": false,
 		"paths": {
 			"@/*": [
 				"src/*",

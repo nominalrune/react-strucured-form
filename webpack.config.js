@@ -18,6 +18,14 @@ module.exports = {
 	entry: {
 		index: "./src/index.ts",
 	},
+	output: {
+		// library: {type:"module"},
+		// filename: 'index.js',
+		// path: path.resolve(__dirname, 'dist'),
+		// filename: '[name].js',
+		libraryTarget: 'umd',
+		library: '[name]',
+	},
 	optimization: {
 		nodeEnv: "production", // NODE_ENV環境変数の設定
 		minimize: true, // 出力結果を1行にするかどうか
@@ -45,14 +53,6 @@ module.exports = {
 				type: 'asset',
 			},
 		],
-	},
-	output: {
-		// library: {type:"module"},
-		// filename: 'index.js',
-		path: path.resolve(__dirname, 'dist'),
-		// filename: '[name].js',
-		libraryTarget: 'umd',
-		library: '[name]',
 	},
 	// experiments: {
 	// 	outputModule: true,
