@@ -45,7 +45,7 @@ export default function IterableGroup<T extends readonly InputAttribute[]>({ mod
 			</div>
 		))}
 		<button
-			className='group/add relative min-h-[3rem] h-full w-full flex items-center justify-center border-solid border-2 border-slate-100 bg-slate-50 rounded-xl hover:border-slate-200 active:border-slate-300'
+			className='group/add relative min-h-[3rem] h-full w-full flex items-center justify-center border-solid border-2 border-slate-100 rounded-xl hover:border-slate-200 active:border-slate-300'
 			onClick={handleAdd}>
 			<div className="absolute z-20 text-2xl size-8 p-2 grid items-center justify-center rounded-full text-slate-400 group-hover/add:text-slate-600 group-hover/add:bg-white group-hover:shadow group-active/add:text-slate-900"><FiPlus/></div>
 			<div className="absolute transition-colors z-10 bg-slate-50/90 group-hover/add:bg-slate-50/60 w-full h-full"></div>
