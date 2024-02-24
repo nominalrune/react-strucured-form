@@ -10,11 +10,12 @@ export default function Group<T extends readonly InputAttribute[]>({ model, valu
 		onChange(initialize(model));
 	}, [model]);
 	function handleChange(name: string, _value: any) {
+		if(!name) return;
 		onChange({ ...value, [name]: _value });
 	}
 	return <div className={`flex ${direction === "horizontal" ? "flex-row overflow-x-auto" : "flex-col"} gap-4 p-3`}>
 		{//@ts-expect-error
-			model.map((prop) => <Input key={'input_group_' + prop.name} prop={prop} value={value[prop.name]} handleChange={handleChange} />)
+			model.map((prop) => <Input key={'input_group_' + prop.name} prop={prop} value={value?.[prop.name]} handleChange={handleChange} />)
 		}
 	</div>;
 }
