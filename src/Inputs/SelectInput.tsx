@@ -17,7 +17,7 @@ export default function SelectInput(
                 unstyled={true}
                 classNames={{//@ts-expect-error
                     control: ({ isDisabled, isFocused }) =>
-                        `bg-white p-2 border-[1px] border-gray-300 outline-2 outline-offset-2 outline-transparent focus-within:border-indigo-500 focus-within:ring-offset-white focus-within:ring-indigo-500 rounded-md shadow-sm`,
+                        `p-2 border-[1px] border-gray-300 outline-2 outline-offset-2 outline-transparent focus-within:border-indigo-500 focus-within:ring-offset-white focus-within:ring-indigo-500 rounded-md shadow-sm`,
                     input: () => 'opacity-0',//@ts-expect-error
                     option: ({ isDisabled, isFocused, isSelected }) => 'py-1 px-2 rounded-sm bg-white hover:bg-indigo-100 focus:bg-indigo-200',
                     menu: () => 'border-[1px] shadow-sm rounded-md m-1',

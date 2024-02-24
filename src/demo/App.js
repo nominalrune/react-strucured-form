@@ -19,7 +19,7 @@ export default function App() {
 					required: true,
 				}, {
 					type: 'group',
-					name: 'contacts',
+					name: 'contacts2',
 					label: 'Contacts',
 					direction: "horizontal",
 					model: [{
@@ -38,7 +38,7 @@ export default function App() {
 							required: true,
 						}, {
 							type: 'radio',
-							name: 'select',
+							name: 'select0',
 							label: 'select',
 							multiple: false,
 							options: [['あいうえお', 'option 1'], ['Option 2', 'option 2'], ['option 3', 'option 3']],
@@ -96,10 +96,63 @@ export default function App() {
 						},],
 					}],
 				}, {
-					type: 'checkbox',
-					name: 'terms',
-					suffix: 'Accept terms and conditions',
-					required: true,
+					type: 'iterable-group',
+					name: 'others',
+					label: 'Others',
+					model: [{
+						type: "textarea",
+						name: "textarea",
+						label: "textarea",
+					}, {
+						type: "group",
+						name: "group3",
+						label: "group3",
+						direction: "horizontal",
+						model: [{
+							type: "select",
+							name: "select1",
+							label: "select",
+							multiple: true,
+							options: [['option 1', 'option 1'], ['option 2', 'option 2'], ['option 3', 'option 3']],
+						}, {
+							type: "select",
+							name: "select2",
+							label: "select",
+							options: [['option 1', 'option 1'], ['option 2', 'option 2'], ['option 3', 'option 3']],
+						}, {
+							type: "select",
+							name: "select3",
+							label: "select",
+							options: [['option 1', 'option 1'], ['option 2', 'option 2'], ['option 3', 'option 3']],
+						},]
+					}, {
+						type: 'group',
+						name: 'groupA',
+						label: 'groupA',
+						direction: "vertical",
+						model: [{
+							type: "date",
+							name: "date",
+							label: "date",
+						}, {
+							type: "time",
+							name: "time",
+							label: "time",
+						},{
+							type: "group",
+							name: "group5",
+							label: "group",
+							direction: "horizontal",
+							model: [{
+								type: "group",
+								name: "group5",
+								label: "group",
+								direction: "horizontal",
+								model: [ ]
+							},]
+						},
+					]
+					},]
 				}],
 				actions: [{ label: "submit", onClick: (data) => { alert(JSON.stringify(data)); } }]
 			})
