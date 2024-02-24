@@ -14,6 +14,7 @@ export default function Radio(
 		onChange({ ...e, target: { ...e.target, value: newValue } });
 	} : onChange;
 	return <Fieldset label={label} overflowScroll={false} className='p-0'>
+		<div className='p-2'>
 		{
 			options.map(([label, itemValue]) => <CheckboxLabel key={type + name + itemValue} label={label}>
 				<input type={type}
@@ -23,5 +24,6 @@ export default function Radio(
 					onChange={handleChange} />
 			</CheckboxLabel>
 			)}
+			</div>
 	</Fieldset>;
 }
