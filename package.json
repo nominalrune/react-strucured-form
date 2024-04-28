@@ -1,6 +1,6 @@
 {
     "name": "react-structured-form",
-    "version": "0.0.12",
+    "version": "0.0.13",
     "description": "React Forms",
     "main": "dist/index.js",
     "keywords": [
