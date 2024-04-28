@@ -33,7 +33,6 @@ export default function SelectInput(
                     }),
                 }}
                 onChange={(e) => { onChange({ target: { name,
-                    //@ts-expect-error
                     value: e instanceof Array
                     ? e.map(i => i.value) : e?.value ?? e } }) }}
                 isMulti={multiple}

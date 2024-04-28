@@ -22,7 +22,6 @@
 			],
 			"common/*": [
 				"src/common/*",
-				"../../common/*",
 			]
 		},
 		"resolveJsonModule": true,

@@ -12,26 +12,28 @@ import Checkbox from './Checkbox';
 import Radio from './Radio';
 
 interface InputProp {
+    id: string;
     prop: InputAttribute,
     handleChange: (key: string, value: any) => void,
     value: any,
 };
-export default function Input({ prop, handleChange, value }: InputProp) {
+export default function Input({ id, prop, handleChange, value }: InputProp) {
     const el = useMemo(() => {
         switch (prop.type) {
             case 'hidden':
                 return <></>;
             case 'group':
                 return <Fieldset label={prop.label}>
-                    <Group model={prop.model} value={value} direction={prop.direction ?? "vertical"} onChange={(_value) => handleChange(prop.name, _value)} />
+                    <Group id={id} model={prop.model} value={value} direction={prop.direction ?? "vertical"} onChange={(_value) => handleChange(prop.name, _value)} />
                 </Fieldset>;
             case 'iterable-group':
                 return <Fieldset label={prop.label} overflowScroll={false}>
-                    <IterableGroup model={prop.model} value={value} onChange={(_value) => handleChange(prop.name, _value)} />
+                    <IterableGroup id={id} model={prop.model} value={value} onChange={(_value) => handleChange(prop.name, _value)} />
                 </Fieldset>;
             case 'select':
                 return <Label {...prop}>
                     <SelectInput
+                        id={id}
                         {...prop}
                         className="w-full md:w-auto"
                         value={value}
@@ -41,12 +43,14 @@ export default function Input({ prop, handleChange, value }: InputProp) {
             case 'checkbox':
                 return <CheckboxLabel {...prop}>
                     <Checkbox
+                        id={id}
                         {...prop}
                         value={value}
                         onChange={(e) => handleChange(prop.name, e.target.checked)} />
                 </CheckboxLabel>;
-            case 'radio'://@ts-expect-error
+            case 'radio':
                 return <Radio
+                    id={id}
                     {...prop}
                     value={value}
                     onChange={(e) => handleChange(prop.name, e.target.value)}
@@ -54,6 +58,7 @@ export default function Input({ prop, handleChange, value }: InputProp) {
             case 'textarea':
                 return <Label {...prop}>
                     <TextareaInput
+                        id={id}
                         {...prop}
                         name={prop.name}
                         className="w-full md:w-auto"
@@ -64,6 +69,7 @@ export default function Input({ prop, handleChange, value }: InputProp) {
             default:
                 return <Label {...prop}>
                     <TextInput
+                        id={id}
                         {...prop}
                         className="w-full md:w-auto"
                         value={value}

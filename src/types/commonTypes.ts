@@ -1,16 +1,11 @@
 import Tuple from '@/types/Tuple';
 import React, { ComponentProps } from 'react';
+import InputType from './InputType';
+import AttributeBase from './AttributeBase';
 
-export type InputAttribute<Name extends string = string> = WithOnChange<
-    | InputAttr<InputType, Name>
-    | SelectAttr<Name>
-    | CheckboxAttr<Name>
-    | RadioAttr<Name>
-    | TextareaAttr<Name>
-    | GroupInput<Name>
-    | IterableGroup<Name>>;
 
-export type InputDataType<T extends InputAttribute<string>> =
+
+export type InputDataType<T extends AttributeBase<InputType, string>> =
     T['type'] extends 'number'
     ? number
     : T['type'] extends 'checkbox'
@@ -21,8 +16,9 @@ export type InputDataType<T extends InputAttribute<string>> =
     ? number | string//@ts-expect-error
     : T['multiple'] extends true 
     ? number[] | string[]
-    : T["type"] extends "iterable-group"//@ts-expect-error
-    ? { [key in T['model'][number]['name']]//@ts-expect-error
+    : T["type"] extends "iterable-group"
+    ? { //@ts-expect-error
+        [key in T['model'][number]['name']]//@ts-expect-error
         : InputDataType<T['model'][number]> }[]//@ts-expect-error
     : T['type'] extends 'group' ? { [key in T['model'][number]['name']]: InputDataType<T['model'][number]> }
     : string;
@@ -36,7 +32,7 @@ export type InputAttr<T extends InputType | "select" | "checkbox" | "textarea" |
     customValidator?: (value: string) => { validity: boolean, errorMessage: string; };
     options?: readonly (readonly [label: string, value: string | number])[],
 } & Omit<ComponentProps<"input">, 'name'|'ref'|`aria-${string}`|"checked"|"value">;
-export type FormModel<N extends number = number> = Tuple<InputAttribute, N>;//N extends 1 ? [InputAttribute] : N extends 2 ? [InputAttribute, InputAttribute] : N extends 3 ? [InputAttribute, InputAttribute, InputAttribute] : N extends 4 ? [InputAttribute, InputAttribute, InputAttribute, InputAttribute] : N extends 5 ? [InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute] : N extends 6 ? [InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute] : N extends 7 ? [InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute] : N extends 8 ? [InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute] : N extends 9 ? [InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute] : [InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute, InputAttribute];
+export type FormModel<N extends number = number> = Tuple<AttributeBase, N>;//N extends 1 ? [AttributeBase] : N extends 2 ? [AttributeBase, AttributeBase] : N extends 3 ? [AttributeBase, AttributeBase, AttributeBase] : N extends 4 ? [AttributeBase, AttributeBase, AttributeBase, AttributeBase] : N extends 5 ? [AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase] : N extends 6 ? [AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase] : N extends 7 ? [AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase] : N extends 8 ? [AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase] : N extends 9 ? [AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase] : [AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase, AttributeBase];
 
 export type TextareaAttr<Name extends string> = InputAttr<'textarea', Name>;
 export interface TextareaParam<T extends DataObj<{ name: U, type: 'textarea'; }>, U extends keyof T & string> {
@@ -63,7 +59,7 @@ interface IterableGroup<Name extends string> {
     label?: React.ReactNode,
     prefix?: React.ReactNode,
     suffix?: React.ReactNode,
-    model: readonly InputAttribute[];
+    model: readonly AttributeBase[];
 }
 interface GroupInput<Name extends string> {
     type: 'group';
@@ -72,7 +68,7 @@ interface GroupInput<Name extends string> {
     prefix?: React.ReactNode,
     suffix?: React.ReactNode,
     direction?: "horizontal" | "vertical",
-    model: readonly InputAttribute[];
+    model: readonly AttributeBase[];
 }
 export interface InputParam<T extends DataObj<{ name: U, type: InputType; }>, U extends keyof T & string> {
     field: InputAttr<InputType, U>,
@@ -80,15 +76,15 @@ export interface InputParam<T extends DataObj<{ name: U, type: InputType; }>, U 
     handleChange: (id: string | number, name: U, value: string | number) => void;
 }
 
-export type DataObj<T extends InputAttribute> = {
+export type DataObj<T extends AttributeBase> = {
     [name in T['name']]: InputDataType<T>;
 };
-export type DataModel<FM extends readonly InputAttribute[]> = FM extends []
+export type DataModel<FM extends readonly AttributeBase[]> = FM extends []
     ? {}
-    : FM extends [InputAttribute]
+    : FM extends [AttributeBase]
     ? DataObj<FM[0]>
-    : DataObj<FM[0]> & DataModel<FM extends [InputAttribute, ...infer R] ? R : []>;
-// export type DataModel<FM extends InputAttribute[]> = FM extends 1
+    : DataObj<FM[0]> & DataModel<FM extends [AttributeBase, ...infer R] ? R : []>;
+// export type DataModel<FM extends AttributeBase[]> = FM extends 1
 //     ? DataObj<FM[0]>
 //     : FM extends 2
 //     ? DataObj<FM[0]> & DataObj<FM[1]>
@@ -109,7 +105,6 @@ export type DataModel<FM extends readonly InputAttribute[]> = FM extends []
 //     : DataObj<FM[0]> & DataObj<FM[1]> & DataObj<FM[2]> & DataObj<FM[3]> & DataObj<FM[4]> & DataObj<FM[5]> & DataObj<FM[6]> & DataObj<FM[7]> & DataObj<FM[8]> & DataObj<FM[9]>
 //     ;
 
-export type InputType = "color" | "date" | "datetime-local" | "email" | "file" | "hidden" | "image" | "month" | "number" | "password" | "radio" | "range" | "reset" | "tel" | "text" | "time" | "url" | "week";
 
 
 type WithOnChange<T> = T & {

@@ -12,6 +12,11 @@ export default function App() {
 					name: 'name',
 					label: 'Name',
 					required: true,
+				},{
+					type: "select",
+					name: "select5",
+					label: "select",
+					options: [['option 1', 'option 1'], ['option 2', 'option 2'], ['option 3', 'option 3']],
 				}, {
 					type: 'email',
 					name: 'email',
@@ -138,20 +143,20 @@ export default function App() {
 							type: "time",
 							name: "time",
 							label: "time",
-						},{
+						}, {
 							type: "group",
 							name: "group5",
 							label: "group",
 							direction: "horizontal",
 							model: [{
-								type: "group",
-								name: "group5",
-								label: "group",
+								type: "radio",
+								name: "radio5",
+								label: "radio",
 								direction: "horizontal",
-								model: [ ]
+								options: [["hi", "hi"], ["bye", "bye"]]
 							},]
 						},
-					]
+						]
 					},]
 				}],
 				actions: [{ label: "submit", onClick: (data) => { alert(JSON.stringify(data)); } }]

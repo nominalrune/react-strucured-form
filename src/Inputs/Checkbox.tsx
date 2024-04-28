@@ -1,11 +1,13 @@
 type Props = {
+    id: string;
     name: string;
     value: boolean;
     onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
-export default function Checkbox({ name, value, onChange }: Props) {
+export default function Checkbox({ id, name, value, onChange }: Props) {
     return (
         <input
+            id={id}
             type="checkbox"
             name={name}
             checked={value}

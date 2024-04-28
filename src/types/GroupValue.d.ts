@@ -1,4 +1,5 @@
-import { InputAttribute, InputDataType } from './commonTypes';
+import AttributeBase from './AttributeBase';
+import {  InputDataType } from './commonTypes';
 
-type GroupValue<T extends readonly InputAttribute[]> ={ [key in T[number]["name"]]: InputDataType<T[number]>; };
+type GroupValue<T extends readonly AttributeBase[]> ={ [key in T[number]["name"]]: InputDataType<T[number]>; };
 export default GroupValue;
