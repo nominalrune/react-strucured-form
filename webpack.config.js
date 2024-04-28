@@ -33,7 +33,7 @@ module.exports = {
 	resolve: {
 		plugins: [new TsconfigPathsPlugin({
 			configFile: "./tsconfig.prod.json",
-			extensions: [".ts", ".tsx", ".js", ".jsx", ".json"]
+			extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
 		})],
 		extensions: [".ts", ".tsx", ".js", ".jsx", ".json"]
 	},
@@ -42,7 +42,10 @@ module.exports = {
 			{
 				test: /\.(j|t)sx?$/,
 				loader: 'ts-loader',
-				exclude: /node_modules/
+				exclude: /node_modules/,
+				options: {
+					transpileOnly: true, // type checkはしない設定
+				},
 			},
 			{
 				test: /\.css$/i,
