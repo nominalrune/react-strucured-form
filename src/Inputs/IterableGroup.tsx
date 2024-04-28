@@ -1,5 +1,4 @@
 import initialize from '@/functions/initialize';
-import { InputAttribute } from '@/types/commonTypes';
 import { useEffect, MouseEvent } from 'react';
 import BaseGroupProps from '@/types/BaseGroupProps';
 import GroupValue from '@/types/GroupValue';

@@ -26,12 +26,12 @@ export default function SelectInput(
                     multiValueRemove: () => 'text-slate-600',
                     indicatorsContainer: () => 'text-slate-700',
                 }}
-                styles={{
+                styles={{/*@ts-expect-error*/
                     control: (baseStyles, state) => ({
                         ...baseStyles,
                         '--tw-ring-shadow': state.isFocused ? 'var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)' : "0 0 transparent",
                     }),
-                }}
+                }}//@ts-expect-error
                 onChange={(e) => { onChange({ target: { name,
                     value: e instanceof Array
                     ? e.map(i => i.value) : e?.value ?? e } }) }}

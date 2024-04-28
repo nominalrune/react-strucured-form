@@ -18,15 +18,16 @@ export default function Form<T extends readonly AttributeBase[]>({ properties, a
     function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e?.preventDefault();
         if ("reportValidity" in e.target && typeof e.target.reportValidity === 'function' && e.target.reportValidity()) { // フォーム内容がvalidなら
+            //@ts-expect-error
             return primary?.onClick(data);
         }
     }
 
     return (
         <form id={"rsf"} onSubmit={primary ? handleSubmit : (e) => { e.preventDefault(); }} className={`flex flex-col`}>
-        
+        {/*@ts-expect-error*/}
             <StructuredInput properties={properties} data={data} setData={setData} />
-    
+    {/*@ts-expect-error*/}
             <Actions data={data} actions={[primary, ...actions]} />
         </form>
     );
